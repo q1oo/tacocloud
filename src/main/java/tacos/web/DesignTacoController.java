@@ -28,22 +28,22 @@ public class DesignTacoController {
 
     private final IngredientRepository ingredientRepo;
 
-    private TacoRepository designRepo;
+    private TacoRepository tacoRepo;
 
     @Autowired
     public DesignTacoController(
             IngredientRepository ingredientRepo,
-            TacoRepository designRepo) {
+            TacoRepository tacoRepo) {
         this.ingredientRepo = ingredientRepo;
-        this.designRepo = designRepo;
+        this.tacoRepo = tacoRepo;
     }
 
     @ModelAttribute(name = "order")
     public Order order() {
         return new Order();
     }
-    @ModelAttribute(name = "taco")
-    public Taco taco() {
+    @ModelAttribute(name = "design")
+    public Taco design() {
         return new Taco();
     }
 
@@ -69,7 +69,7 @@ public class DesignTacoController {
         if (errors.hasErrors()) {
             return "design";
         }
-        Taco saved = designRepo.save(design);
+        Taco saved = tacoRepo.save(design);
         order.addDesign(saved);
         return "redirect:/orders/current";
     }
